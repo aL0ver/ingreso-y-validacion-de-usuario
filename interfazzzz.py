@@ -1,3 +1,4 @@
+
 print("¡Bienvenido!")
 usernames = ["admin", "noadmin"]
 passwords = ["admin", "noadmin"]
@@ -13,6 +14,8 @@ def intValidacion(entrada):
         int(entrada)
     except ValueError:
         print("No debes escribir letras ni simbolos")
+    else:
+        return True 
 
 def userValidacion(user,password):
     intentos_user = 0
@@ -22,8 +25,8 @@ def userValidacion(user,password):
     
     for _ in usernames:
         intentos_user += 1
-        iterable_pass = usernames[intentos_user-1]
-        if iterable_pass == user:
+        iterable_user = usernames[intentos_user-1]
+        if iterable_user == user:
             true_user += 1
             break
     if true_user == 1:
@@ -31,12 +34,11 @@ def userValidacion(user,password):
             intentos_pass += 1
             iterable_pass = passwords[intentos_pass-1]
             if iterable_pass == password:
-                true_user += 1
+                true_pass += 1
                 break
-    if true_pass == 1 and intentos_pass == intentos_user:      # arreglar esta mierda :v
+    if true_pass == 1 and intentos_pass == intentos_user:
         return True
-    else:
-        return False
+    
 
 
 while True:
@@ -45,8 +47,10 @@ while True:
     print(initial_option)
     
     while True:
-        eleccion = input("Que desea hacer?: ")
-        intValidacion(eleccion)
+        while True:    
+            eleccion = input("Que desea hacer?: ")
+            if intValidacion(eleccion) == True:
+                break
         if int(eleccion) > len(initial_option):
             print(f"{initial_option} no es una opcion valida")
             continue        
@@ -69,29 +73,45 @@ while True:
 
     elif  int(eleccion) == 2:
         while True:
-            intentos = 1
-            while intentos >= 1:
-                intentos += 1
-                new_user = input("Ingrese el nombre de usuario que desea: ")
-                if new_user in usernames:
-                        print("Ese nombre de usuario no esta disponible, por favor intenta otro")
-                        continue
-                check_new_user = input("Ingrese de nuevo el nombre de usuario que desea: ")
-                if checkBox(new_user,check_new_user) == True:
-                        usernames += new_user
-                        print(f"{new_user} registrado correctamente")
-                        break
-                else:
-                    print("Tu entradas de nombre de usuario no concuerdan")
-                if intentos >= 5:
-                    print("Desea Cancelar la creacion del nuevo usuario?")
+            new_user = input("Ingrese el nombre de usuario que desea: ")
+            if new_user in usernames:
+                    print("Ese nombre de usuario no esta disponible, por favor intenta otro")
+                    continue
+            check_new_user = input("Ingrese de nuevo el nombre de usuario que desea: ")
+            if checkBox(new_user,check_new_user) == True:
+                    usernames += [new_user]
+            else:
+                print("Tu entradas de nombre de usuario no concuerdan")
+                while True:
                     while True:
+                        print("Desea Cancelar la creacion del nuevo usuario?")    
                         cancelacion_new_user = input("Si: 1  No: 2\n")
-                        intValidacion(cancelacion_new_user)
-                        if int(cancelacion_new_user) > 2:
-                            print("Esa no es una opcion valida")
-                        elif int(cancelacion_new_user) == 1:
+                        if intValidacion(cancelacion_new_user) == True:
                             break
-                        else:
-                            intentos -= 4
-                            break 
+                    if int(cancelacion_new_user) > 2:
+                        print("Esa no es una opcion valida")
+                        continue
+                    else: 
+                        break 
+            if int(cancelacion_new_user) == 1:
+                break
+        while True:
+            new_pass = input("Ingrese la contraseña que desea: ")
+            check_new_pass = input("Ingrese de nuevo la contraseña que desea: ")
+            if checkBox(new_pass,check_new_pass) == True:
+                    passwords += [new_pass]
+                    print(f"El usuario {new_user} registrado correctamente") ## Borrar al final
+                    break
+            else:
+                print("Tu entradas contraseña no concuerdan")
+                while True:
+                    while True:
+                        print("Desea Cancelar la creacion del nuevo usuario?")    
+                        cancelacion_new_user = input("Si: 1  No: 2\n")
+                        if intValidacion(cancelacion_new_user) == True:
+                            break
+                    if int(cancelacion_new_user) > 2:
+                        print("Esa no es una opcion valida")
+                        continue
+                    else: 
+                        break 
