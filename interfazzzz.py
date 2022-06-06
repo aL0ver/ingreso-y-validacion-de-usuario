@@ -110,7 +110,7 @@ while True:
             check_new_pass = input("Ingrese de nuevo la contraseña que desea: ")
             if checkBox(new_pass,check_new_pass) == True:
                     passwords += [new_pass]
-                    print(f"El usuario {new_user} registrado correctamente") 
+                    print(f"El usuario {new_user} registrado correctamente") # falta validad que la entrada no sea null
                     break
             else:
                 print("Tu entradas contraseña no concuerdan")
@@ -125,5 +125,5 @@ while True:
                         continue
                     else: 
                         break 
-        if int(cancelacion_new_user)==1:
+        if int(cancelacion_new_user)==1: # arreglar esto para que se cancele la creacion del usuario
             New_User_ =- New_User_
