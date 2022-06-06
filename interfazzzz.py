@@ -1,14 +1,11 @@
-
 print("¡Bienvenido!")
 usernames = ["admin", "noadmin"]
 passwords = ["admin", "noadmin"]
-
 def checkBox(box1,box2):
     if box1 == box2:
         return True
     else:
         return False
-
 def intValidacion(entrada):
     try:
         int(entrada)
@@ -16,13 +13,11 @@ def intValidacion(entrada):
         print("No debes escribir letras ni simbolos")
     else:
         return True 
-
 def userValidacion(user,password):
     intentos_user = 0
     intentos_pass = 0
     true_user = 0
     true_pass = 0
-    
     for _ in usernames:
         intentos_user += 1
         iterable_user = usernames[intentos_user-1]
@@ -38,14 +33,10 @@ def userValidacion(user,password):
                 break
     if true_pass == 1 and intentos_pass == intentos_user:
         return True
-    
 New_User_ = 0
-
 while True:
-
     initial_option = ("Iniciar Sesion: 1" , "Crear Usuario: 2", "Cerrar Programa: 3")
-    print(initial_option)
-    
+    print(initial_option) 
     while True:
         while True:    
             eleccion = input("Que desea hacer?: ")
@@ -56,11 +47,9 @@ while True:
             continue        
         else: 
             break 
-    
     if int(eleccion) == 3:
         print("Se procedera a cerrar el programa")
         quit()
-
     elif int(eleccion) == 1:
         while True:
             user_name = input("Ingrese su nombre de usuario: ") 
@@ -86,7 +75,6 @@ while True:
                         print("Esa no es una opcion valida")
             if int(new_user_) == 1:
                 break     
-
     if  int(eleccion) == 2 or New_User_ == 1:
         while True:
             cancelacion = 0
@@ -95,7 +83,7 @@ while True:
             if new_user in usernames:
                     print("Ese nombre de usuario no esta disponible, por favor intenta otro")
                     continue
-            check_new_user = input("Ingrese de nuevo el nombre de usuario que desea: ")
+            check_new_user = input("Ingrese de nuevo el nombre de usuario que desea: ") #Crear Usuario
             if checkBox(new_user,check_new_user) == True:
                     usernames += [new_user]
                     break
@@ -118,7 +106,7 @@ while True:
             if cancelacion == 1:
                 break
         while True:
-            new_pass = input("Ingrese la contraseña que desea: ")
+            new_pass = input("Ingrese la contraseña que desea: ")   # Crear Contraseña
             check_new_pass = input("Ingrese de nuevo la contraseña que desea: ")
             if checkBox(new_pass,check_new_pass) == True:
                     passwords += [new_pass]
@@ -137,4 +125,5 @@ while True:
                         continue
                     else: 
                         break 
-        New_User_ =- New_User_
+        if int(cancelacion_new_user)==1:
+            New_User_ =- New_User_
